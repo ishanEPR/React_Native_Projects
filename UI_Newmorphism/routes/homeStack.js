@@ -5,11 +5,12 @@ import ReviewDetails from '../screens/reviewDetails';
 
 
 const screens={
-    ReviewDetails:{
-        screen:ReviewDetails
-    },
+    
     Home:{
         screen:Home
+    },
+    ReviewDetails:{
+        screen:ReviewDetails
     }
     
 }
