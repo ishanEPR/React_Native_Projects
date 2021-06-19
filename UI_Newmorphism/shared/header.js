@@ -10,7 +10,7 @@ export default function Header({navigation,title}){
     return(
 
         <View style={styles.header}>
-         <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.icon} />
+         <MaterialIcons name="menu" size={28} onPress={openMenu} style={styles.icon} />
             <View>
                 <Text style={styles.headerText}>{title}</Text>
             </View>
