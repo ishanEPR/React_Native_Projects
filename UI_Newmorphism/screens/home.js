@@ -1,18 +1,30 @@
-import React from 'react';
-import {StyleSheet,View,Text,Button} from 'react-native';
+import React,{useState} from 'react';
+import {StyleSheet,View,Text,Button,FlatList,TouchableOpacity} from 'react-native';
 import {globalStyles} from '../styles/global';
 
 export default function Home({navigation})
 {
 
-    const pressHandler= ()=>{
-       // navigation.navigate('ReviewDetails')
-       navigation.push('ReviewDetails')
-    }
+    const [reviews,setReviews]=useState([
+        {title:'ishannnnnnn',rating:5,body:'lorem ipsum',key:'1'},
+        {title:'ishannnnnnn1',rating:4,body:'lorem ipsum',key:'2'},
+        {title:'ishannnnnnn2',rating:3,body:'lorem ipsum',key:'3'},
+    ])
+
+
+   
     return(
     <View style={globalStyles.container}>
-        <Text style={globalStyles.titleText}>Home Screen</Text>
-        <Button title='go to review dets' onPress={pressHandler}/>
+       <FlatList
+       data={reviews}
+       renderItem={({item})=>(
+
+           <TouchableOpacity onPress={()=>navigation.navigate('ReviewDetails',item)}>
+                <Text style={globalStyles.titleText}>{item.title}</Text>
+           </TouchableOpacity>
+       )}
+       />
+       
     </View>
     );
 }
