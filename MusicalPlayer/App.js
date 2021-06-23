@@ -1,21 +1,64 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+//class definition
+import React,{Component} from 'react';
+import {View,Text,StyleSheet,Button} from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+  const Person = (props) =>{
+    return(
+      <View>
+        <Text>Hello My Name Is {props.name}</Text>
+      </View>
+    )
+  }
+
+export default class App extends Component{
+
+  state={count:0};
+  render()
+  {
+    
+     return(
+  
+   
+      <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+        <Person name={this.state.count<5? "Ishan":"Why"}/>
+        <Person name="Reshmika"/>
+        <Text>{this.state.count}</Text>
+       
+        <Button
+        title='Submit'
+        disabled={this.state.count>5}
+          onPress= {()=>{
+            this.setState({count:this.state.count+1})
+          }
+          }
+        />
+      </View>
+        
+    
+  )
+  }
 }
+//functional component
+// import React from 'react';
+// import {View,Text,StyleSheet,Button} from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// export default function App(){
+//   state={count:0};
+//   return(
+  
+   
+//       <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+//         <Text>{this.state.count}</Text>
+       
+//         <Button
+//           onPress= {()=>{
+//             this.setState({count:1})
+//           }
+//           }
+//         />
+//       </View>
+        
+    
+//   )
+// }
