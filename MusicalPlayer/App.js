@@ -11,6 +11,14 @@ import {View,Text,StyleSheet,Button} from 'react-native';
     )
   }
 
+  const PersonAge= (props)=>{
+    return(
+      <View>
+          <Text>My age is: {props.age}</Text>
+      </View>
+    );
+  }
+
 export default class App extends Component{
 
   state={count:0};
@@ -23,6 +31,7 @@ export default class App extends Component{
       <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
         <Person name={this.state.count<5? "Ishan":"Why"}/>
         <Person name="Reshmika"/>
+        <PersonAge age="23"/>
         <Text>{this.state.count}</Text>
        
         <Button
