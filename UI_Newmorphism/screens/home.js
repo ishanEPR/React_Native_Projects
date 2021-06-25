@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {StyleSheet,View,Text,Button,FlatList,TouchableOpacity,Modal} from 'react-native';
 import {globalStyles} from '../styles/global';
 import Card from '../shared/card';
-
+import { MaterialIcons } from '@expo/vector-icons';
 export default function Home({navigation})
 {
 
@@ -19,13 +19,21 @@ export default function Home({navigation})
     return(
     <View style={globalStyles.container}>
 
-        <Modal visible={modalOpen}>
+        <Modal visible={modalOpen} animationType='slide'>
             <View>
+                 <MaterialIcons name='close' 
+                size={24}
+                onPress={() =>setModalOpen(false)}/>
                 <Text>Hello from Modal</Text>
             
             </View>
 
         </Modal>
+
+        <MaterialIcons name='add' 
+        size={24}
+        onPress={() =>setModalOpen(true)}
+        />
        <FlatList
        data={reviews}
        renderItem={({item})=>(
