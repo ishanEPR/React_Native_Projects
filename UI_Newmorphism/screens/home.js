@@ -20,9 +20,10 @@ export default function Home({navigation})
     <View style={globalStyles.container}>
 
         <Modal visible={modalOpen} animationType='slide'>
-            <View>
+            <View style={styles.modalContent}>
                  <MaterialIcons name='close' 
                 size={24}
+                style={{...styles.modalToggle,...styles.modalClose}}
                 onPress={() =>setModalOpen(false)}/>
                 <Text>Hello from Modal</Text>
             
@@ -33,6 +34,7 @@ export default function Home({navigation})
         <MaterialIcons name='add' 
         size={24}
         onPress={() =>setModalOpen(true)}
+        style={styles.modalToggle}
         />
        <FlatList
        data={reviews}
@@ -50,3 +52,24 @@ export default function Home({navigation})
     );
 }
 
+
+const styles=StyleSheet.create({
+
+    modalToggle:{
+        marginBottom:10,
+        borderWidth:1,
+        borderColor: '#f2f2f2',
+        padding:10,
+        borderRadius: 10,
+        alignSelf: 'center'
+
+    },
+    modalClose: {
+        marginTop:20,
+        marginBottom:0,
+    },
+    modalContent: {
+        flex: 1,
+    }
+
+});
