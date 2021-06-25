@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
-import {StyleSheet,View,Text,Button,FlatList,TouchableOpacity} from 'react-native';
+import {StyleSheet,View,Text,Button,FlatList,TouchableOpacity,Modal} from 'react-native';
 import {globalStyles} from '../styles/global';
 import Card from '../shared/card';
 
 export default function Home({navigation})
 {
 
+
+    const [modalOpen,setModalOpen]=useState(false)
     const [reviews,setReviews]=useState([
         {title:'ishannnnnnn',rating:5,body:'lorem ipsum',key:'1'},
         {title:'ishannnnnnn1',rating:4,body:'lorem ipsum',key:'2'},
@@ -16,6 +18,14 @@ export default function Home({navigation})
    
     return(
     <View style={globalStyles.container}>
+
+        <Modal visible={modalOpen}>
+            <View>
+                <Text>Hello from Modal</Text>
+            
+            </View>
+
+        </Modal>
        <FlatList
        data={reviews}
        renderItem={({item})=>(
