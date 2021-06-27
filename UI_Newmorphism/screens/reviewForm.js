@@ -1,5 +1,7 @@
+
+
 import React from 'react';
-import {StyleSheet,Button,TextInput,View,Text} from 'react-native';
+import {StyleSheet,View,Text,TextInput,Button} from 'react-native';
 import {globalStyles} from '../styles/global.js';
 import {Formik} from 'formik';
 
@@ -14,8 +16,8 @@ export default function ReviewForm() {
                 }}
             />
 
-            {
-                (props)=>(
+            {(props)=>(
+
                     <View>
                         <TextInput
                         style={globalStyles.input}
@@ -36,7 +38,7 @@ export default function ReviewForm() {
 
                         <TextInput
                         style={globalStyles.input}
-                        placeholder='Rating'
+                        placeholder='Rating (1-5)'
                         onChangeText={props.handleChane('rating')}
                         value={props.values.rating}
                         />

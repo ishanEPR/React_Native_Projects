@@ -7,6 +7,17 @@ export const globalStyles=StyleSheet.create({
     titleText:{
         fontSize:18,
         fontWeight:'bold'
+    },
+    input:{
+        borderWidth:1,
+        borderColor: '#ddd',
+        padding: 10,
+        fontSize:18,
+        borderRadius: 6,
+    },
+    paragraph:{
+        marginVertical:8,
+        lineHeight: 20
     }
 })
 

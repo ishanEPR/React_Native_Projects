@@ -26,7 +26,7 @@ export default function Home({navigation})
                 size={24}
                 style={{...styles.modalToggle,...styles.modalClose}}
                 onPress={() =>setModalOpen(false)}/>
-                <Text>Hello from Modal</Text>
+                <ReviewForm/>
             
             </View>
 
