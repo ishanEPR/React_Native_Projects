@@ -7,7 +7,10 @@ import Navigator from './routes/drawer';
 export default function App() {
  
     return (
-   <Navigator/>
+      <View>
+          <Navigator/>
+      </View>
+   
   );
   //  "dependencies": {
   //   "@react-native-community/masked-view": "0.1.10",
