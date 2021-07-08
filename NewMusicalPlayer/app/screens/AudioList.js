@@ -13,6 +13,8 @@ export class AudioList extends Component {
         this.state={
             optionModalVisible: false,
         }
+
+        this.currentItem={}
     }
 
 
@@ -39,6 +41,7 @@ export class AudioList extends Component {
         duration={item.duration}
 
         onOptionPress={()=>{
+            this.currentItem=item;
            // console.log('opening option');
            this.setState({...this.state,optionModalVisible:true})
         }}
@@ -57,7 +60,9 @@ export class AudioList extends Component {
                     layoutProvider={this.layoutProvider}
                     rowRender={this.rowRender}
                 />
-                <OptionModal onClose={()=>{
+                <OptionModal 
+                currentItem={this.currentItem}
+                onClose={()=>{
                     this.setState({...this.state,optionModalVisible: false})
                 }} visible={this.state.optionModalVisible}/>
                 </Screen>

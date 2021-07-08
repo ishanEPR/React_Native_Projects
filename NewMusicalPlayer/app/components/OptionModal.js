@@ -2,7 +2,8 @@ import React from 'react'
 import { View, Text,Modal,StatusBar,StyleSheet,TouchableWithoutFeedback } from 'react-native'
 import color from '../misc/color';
 
-const OptionModal = ({visible,onClose}) => {
+const OptionModal = ({visible,currentItem,onClose}) => {
+    const {filename}=currentItem
     return (
        <>
        <StatusBar hidden/>
@@ -10,7 +11,7 @@ const OptionModal = ({visible,onClose}) => {
             <View style={styles.modal}>
                 <Text 
                 numberOfLines={2}
-                style={styles.title}>Dynamic text</Text>
+                style={styles.title}>{filename}</Text>
                 <View style={styles.optionContainer}>
                     <Text  style={styles.option}>Play</Text>
                     <Text style={styles.option}> Add to PlayList</Text>
