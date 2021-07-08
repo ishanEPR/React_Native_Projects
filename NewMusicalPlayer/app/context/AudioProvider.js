@@ -1,29 +1,75 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native';
+import React, { useEffect,useState } from 'react'
+import { Text, View ,Alert} from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
 
-export class AudioProvider extends Component {
+export default function AudioProvider() {
 
-    constructor(props){
-        super(props) 
+    const [granted,setGranted]=useState(false);
+    const [canAskAgain,setcanAskAgain]=useState(true);
+    const [status,setStatus]=useState("undetermined");
+    const [expires,setExpires]=useState("never");
+
+    
+//{
+    // "granted":false,
+    // "canAskAgain":true,
+    // "status":"undetermined",
+    // "expires":"never"
+    // }
+    permissionAlert = () => {
+       Alert.alert("Permission Required","This app needs to audio files!",
+       [{
+           text:"I am ready",
+           onPress: () => useEffect()
+       },
+       {
+           text: 'cancle',
+           onPress: () => permissionAlert()
+       }
+       ])
     }
 
+useEffect(() => {
+    MediaLibrary.getPermissionsAsync().then(data => {
+     
+      if (granted) {
+          // alert(JSON.stringify(data.canAskAgain));
 
-    getPermission = async ()=>{
-        const permission=await MediaLibrary.getPermissionAsync()
-        console.log(permission);
-    }
-    componentDidMount(){
+          //we want to get all the audio files
+      }
+     
+  if(!granted && canAskAgain){
+      const {status,canAskAgain}= MediaLibrary.requestPermissionsAsync();
+      if(status === 'denied' && canAskAgain)
+      {
+          //we are going to display alert that user
+          // must allow this permission to work this app
+          permissionAlert();
 
-        getPermission()
-    }
-    render() {
+      }
+      if(status ==='granted'){
+            //we want to get all the audio files
+      }
+
+      if(status === 'denied' && !canAskAgain)
+      {
+          //we want to display some error to the user
+
+      }
+  }
+
+    
+    });
+  }, []);
+   
+   
+   
         return (
             <View>
                 <Text> textInComponent </Text>
             </View>
         )
-    }
+    
 }
 
-export default AudioProvider
+

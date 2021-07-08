@@ -6,7 +6,7 @@ export default function AudioList() {
 
 useEffect(() => {
     MediaLibrary.getPermissionsAsync().then(data => {
-      console.log(JSON.stringify(data));
+      alert(JSON.stringify(data));
     });
   }, []);
     return (
