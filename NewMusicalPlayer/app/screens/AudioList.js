@@ -4,6 +4,7 @@ import {AudioContext} from '../context/AudioProvider';
 import {RecyclerListView, LayoutProvider} from 'recyclerlistview';
 import AudioListItem from '../components/AudioListItem';
 import Screen from '../components/Screen.js';
+import OptionModal from '../components/OptionModal.js';
 export class AudioList extends Component {
 
 
@@ -47,6 +48,7 @@ export class AudioList extends Component {
                     layoutProvider={this.layoutProvider}
                     rowRender={this.rowRender}
                 />
+                <OptionModal visible={true}/>
                 </Screen>
 
             }
