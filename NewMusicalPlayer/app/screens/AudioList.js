@@ -61,6 +61,9 @@ export class AudioList extends Component {
                     rowRender={this.rowRender}
                 />
                 <OptionModal 
+                onPlayPress={()=>console.log('playing audio')}
+                onPlayListPress={()=>console.log('adding new list')}
+
                 currentItem={this.currentItem}
                 onClose={()=>{
                     this.setState({...this.state,optionModalVisible: false})
