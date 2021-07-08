@@ -1,8 +1,10 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState,createContext } from 'react'
 import { Text, View ,Alert} from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
 
-export default function AudioProvider() {
+export const AudioContext=createContext();
+
+export default function AudioProvider(props) {
 
     const [granted,setGranted]=useState(false);
     const [canAskAgain,setcanAskAgain]=useState(true);
@@ -29,6 +31,13 @@ export default function AudioProvider() {
        ])
     }
 
+    getAudioFiles =  () =>{
+        const media= MediaLibrary.getAssetAsync({
+            mediaType:'auto'
+        })
+        console.log(media)
+    }
+
 useEffect(() => {
     MediaLibrary.getPermissionsAsync().then(data => {
      
@@ -36,6 +45,7 @@ useEffect(() => {
           // alert(JSON.stringify(data.canAskAgain));
 
           //we want to get all the audio files
+          getAudioFiles();
       }
      
   if(!granted && canAskAgain){
@@ -49,6 +59,7 @@ useEffect(() => {
       }
       if(status ==='granted'){
             //we want to get all the audio files
+            getAudioFiles();
       }
 
       if(status === 'denied' && !canAskAgain)
@@ -64,11 +75,10 @@ useEffect(() => {
    
    
    
-        return (
-            <View>
-                <Text> textInComponent </Text>
-            </View>
-        )
+        return <AudioContext.Provider value={{}}>
+        {props.children}
+
+        </AudioContext.Provider>
     
 }
 
