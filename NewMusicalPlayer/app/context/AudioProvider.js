@@ -93,6 +93,9 @@ export class AudioProvider extends Component {
 
     constructor(props){
         super(props);
+        this.state={
+            audioFiles: []
+        }
     }
 
     componentDidMount(){
@@ -158,11 +161,12 @@ export class AudioProvider extends Component {
             mediaType:'audio',
             first: media.totalCount,
         });
-        console.log(media.assets.length)
+      //  console.log(media.assets.length)
+      this.setState({...this.state,audioFiles: media.assets})
     }
 
     render() {
-           return <AudioContext.Provider value={{}}>
+           return <AudioContext.Provider value={{audioFiles: this.state.audioFiles}}>
         {this.props.children}
 
         </AudioContext.Provider>
