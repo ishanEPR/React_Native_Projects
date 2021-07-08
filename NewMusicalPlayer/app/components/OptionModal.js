@@ -16,7 +16,7 @@ const OptionModal = ({visible}) => {
                     <Text style={styles.option}> Add to PlayList</Text>
                 </View>
             </View>
-
+            <View style={styles.modalBg}/>
        
        </Modal>
        </>
@@ -32,6 +32,7 @@ const styles=StyleSheet.create({
         backgroundColor:color.APP_BG,
         borderTopLeftRadius:20,
         borderTopRighttRadius:20,
+        zIndex:1000,
     },
     title:{
         fontSize:18,
@@ -53,6 +54,14 @@ const styles=StyleSheet.create({
         color: color.FONT,
         paddingVertical:10,
         letterSpacing:1,
+    },
+    modalBg:{
+        position:'absolute',
+        top:0,
+        right:0,
+        left:0,
+        bottom:0,
+        backgroundColor:color.MODAL_BG,
     }
 })
 

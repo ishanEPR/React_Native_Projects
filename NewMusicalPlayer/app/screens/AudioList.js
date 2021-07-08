@@ -7,6 +7,14 @@ import Screen from '../components/Screen.js';
 import OptionModal from '../components/OptionModal.js';
 export class AudioList extends Component {
 
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            optionModalVisible: false,
+        }
+    }
+
 
     static contextType=AudioContext;
 
@@ -31,7 +39,8 @@ export class AudioList extends Component {
         duration={item.duration}
 
         onOptionPress={()=>{
-            console.log('opening option');
+           // console.log('opening option');
+           this.setState({...this.state,optionModalVisible:true})
         }}
 
         />
@@ -48,7 +57,7 @@ export class AudioList extends Component {
                     layoutProvider={this.layoutProvider}
                     rowRender={this.rowRender}
                 />
-                <OptionModal visible={true}/>
+                <OptionModal visible={this.state.optionModalVisible}/>
                 </Screen>
 
             }
