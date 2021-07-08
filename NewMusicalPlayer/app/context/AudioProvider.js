@@ -94,7 +94,8 @@ export class AudioProvider extends Component {
     constructor(props){
         super(props);
         this.state={
-            audioFiles: []
+            audioFiles: [],
+            permissionError: false
         }
     }
 
@@ -111,6 +112,11 @@ export class AudioProvider extends Component {
 
           //we want to get all the audio files
           this.getAudioFiles();
+      }
+
+
+      if(!permission.granted && !permission.canAskAgain){
+          this.setState({...this.state,permissionError:true})
       }
 
 
@@ -132,6 +138,8 @@ export class AudioProvider extends Component {
       if(status === 'denied' && !canAskAgain)
       {
           //we want to display some error to the user
+            this.setState({...this.state, permissionError: true})
+
 
       }
   }
@@ -166,6 +174,16 @@ export class AudioProvider extends Component {
     }
 
     render() {
+        if(this.state.permissionError) return <View
+        style={{
+             flex:1,
+             justifyContent: 'center',
+             alignItems: 'center',
+        }}
+        >
+        <Text style={{fontSize:25,textAlign: 'center',color: 'red'}}>It looks like you haven't accept the permission</Text>
+        
+        </View>
            return <AudioContext.Provider value={{audioFiles: this.state.audioFiles}}>
         {this.props.children}
 
