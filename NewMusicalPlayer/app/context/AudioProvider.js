@@ -1,65 +1,129 @@
-import React, { useEffect,useState,createContext } from 'react'
-import { Text, View ,Alert} from 'react-native';
+// import React, { useEffect,useState,createContext } from 'react'
+// import { Text, View ,Alert} from 'react-native';
+// import * as MediaLibrary from 'expo-media-library';
+
+// export const AudioContext=createContext();
+
+// export default function AudioProvider(props) {
+
+//     const [granted,setGranted]=useState(false);
+//     const [canAskAgain,setcanAskAgain]=useState(true);
+//     const [status,setStatus]=useState("undetermined");
+//     const [expires,setExpires]=useState("never");
+
+    
+// //{
+//     // "granted":false,
+//     // "canAskAgain":true,
+//     // "status":"undetermined",
+//     // "expires":"never"
+//     // }
+//     permissionAlert = () => {
+//        Alert.alert("Permission Required","This app needs to audio files!",
+//        [{
+//            text:"I am ready",
+//            onPress: () => useEffect()
+//        },
+//        {
+//            text: 'cancle',
+//            onPress: () => permissionAlert()
+//        }
+//        ])
+//     }
+
+//     getAudioFiles =  () =>{
+//         const media= MediaLibrary.getAssetAsync({
+//             mediaType:'auto'
+//         })
+//         console.log(media)
+//     }
+
+// useEffect(() => {
+//     MediaLibrary.getPermissionsAsync().then(data => {
+     
+//       if (granted) {
+//           // alert(JSON.stringify(data.canAskAgain));
+
+//           //we want to get all the audio files
+//           getAudioFiles();
+//       }
+     
+//   if(!granted && canAskAgain){
+//       const {status,canAskAgain}= MediaLibrary.requestPermissionsAsync();
+//       if(status === 'denied' && canAskAgain)
+//       {
+//           //we are going to display alert that user
+//           // must allow this permission to work this app
+//           permissionAlert();
+
+//       }
+//       if(status ==='granted'){
+//             //we want to get all the audio files
+//             getAudioFiles();
+//       }
+
+//       if(status === 'denied' && !canAskAgain)
+//       {
+//           //we want to display some error to the user
+
+//       }
+//   }
+
+    
+//     });
+//   }, []);
+   
+   
+   
+//         return <AudioContext.Provider value={{}}>
+//         {props.children}
+
+//         </AudioContext.Provider>
+    
+// }
+
+
+import React, { Component,createContext } from 'react'
+import { Text, View,Alert } from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
 
 export const AudioContext=createContext();
 
-export default function AudioProvider(props) {
+export class AudioProvider extends Component {
 
-    const [granted,setGranted]=useState(false);
-    const [canAskAgain,setcanAskAgain]=useState(true);
-    const [status,setStatus]=useState("undetermined");
-    const [expires,setExpires]=useState("never");
-
-    
-//{
-    // "granted":false,
-    // "canAskAgain":true,
-    // "status":"undetermined",
-    // "expires":"never"
-    // }
-    permissionAlert = () => {
-       Alert.alert("Permission Required","This app needs to audio files!",
-       [{
-           text:"I am ready",
-           onPress: () => useEffect()
-       },
-       {
-           text: 'cancle',
-           onPress: () => permissionAlert()
-       }
-       ])
+    constructor(props){
+        super(props);
     }
 
-    getAudioFiles =  () =>{
-        const media= MediaLibrary.getAssetAsync({
-            mediaType:'auto'
-        })
-        console.log(media)
+    componentDidMount(){
+        this.getPermission()
     }
 
-useEffect(() => {
-    MediaLibrary.getPermissionsAsync().then(data => {
-     
-      if (granted) {
+    getPermission = async ()=>{
+        const permission=await MediaLibrary.getPermissionsAsync()
+       // console.log(permission);
+
+        if (permission.granted) {
           // alert(JSON.stringify(data.canAskAgain));
 
           //we want to get all the audio files
-          getAudioFiles();
+          this.getAudioFiles();
       }
-     
-  if(!granted && canAskAgain){
-      const {status,canAskAgain}= MediaLibrary.requestPermissionsAsync();
+
+
+       
+  if(!permission.granted  && permission.canAskAgain){
+      const {status,canAskAgain}=await MediaLibrary.requestPermissionsAsync();
       if(status === 'denied' && canAskAgain)
       {
           //we are going to display alert that user
           // must allow this permission to work this app
-          permissionAlert();
+          this.permissionAlert();
 
       }
       if(status ==='granted'){
             //we want to get all the audio files
-            getAudioFiles();
+            this.getAudioFiles();
       }
 
       if(status === 'denied' && !canAskAgain)
@@ -69,17 +133,37 @@ useEffect(() => {
       }
   }
 
-    
-    });
-  }, []);
-   
-   
-   
-        return <AudioContext.Provider value={{}}>
-        {props.children}
+
+    }
+
+     permissionAlert = () => {
+       Alert.alert("Permission Required","This app needs to audio files!",
+       [{
+           text:"I am ready",
+           onPress: () => this.getPermission()
+       },
+       {
+           text: 'cancle',
+           onPress: () => this.permissionAlert()
+       }
+       ])
+    }
+
+
+    getAudioFiles = async () =>{
+        const media= await  MediaLibrary.getAssetsAsync({
+            mediaType:'audio'
+        })
+        console.log(media)
+    }
+
+    render() {
+           return <AudioContext.Provider value={{}}>
+        {this.props.children}
 
         </AudioContext.Provider>
-    
+    }
 }
 
+export default AudioProvider
 
