@@ -3,7 +3,7 @@ import { View, Text,StyleSheet } from 'react-native';
 
 export default function AudioList() {
     return (
-        <View style={style.container}>
+        <View style={styles.container}>
             <Text>Audio List</Text>
         </View>
     )
