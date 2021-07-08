@@ -151,10 +151,14 @@ export class AudioProvider extends Component {
 
 
     getAudioFiles = async () =>{
-        const media= await  MediaLibrary.getAssetsAsync({
+        let media= await  MediaLibrary.getAssetsAsync({
             mediaType:'audio'
-        })
-        console.log(media)
+        });
+        media= await  MediaLibrary.getAssetsAsync({
+            mediaType:'audio',
+            first: media.totalCount,
+        });
+        console.log(media.assets.length)
     }
 
     render() {
