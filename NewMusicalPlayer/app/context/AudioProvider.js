@@ -181,6 +181,11 @@ export class AudioProvider extends Component {
       audioFiles: [...audioFiles, ...media.assets]})
     }
 
+
+
+    updateState = (prevState,newState ={})=>{
+        this.setState({...prevState,...newState})
+    }
     render() {
         const {audioFiles,dataProvider,permissionError,playbackObj,soundObj,currentAudio}=this.state
         if(permissionError) return <View
@@ -197,9 +202,11 @@ export class AudioProvider extends Component {
             value={{
                 audioFiles, 
                 dataProvider,
-                playbackObj:null,
-                soundObj: null,
-                currentAudio:{},}}>
+                playbackObj,
+                soundObj,
+                currentAudio,
+                updateState : this.updateState
+                }}>
         {this.props.children}
 
         </AudioContext.Provider>
