@@ -56,7 +56,14 @@ export class AudioList extends Component {
         //pause audio
         if(this.state.soundObj.isLoaded && this.state.soundObj.isPlaying)
         {
-            console.log('audion is already runnung');
+           // console.log('audion is already runnung');
+
+          const status=await this.state.playbackObj.setStatusAsync({shouldPlay: false})
+
+           return this.setState(
+               {...this.state, 
+               
+               soundObj: status})
         }
     }
 
