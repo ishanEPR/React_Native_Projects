@@ -29,10 +29,11 @@ const converTime = minutes =>{
     }
 };
 
-const AudioListItem = ({title,duration,onOptionPress}) => {
+const AudioListItem = ({title,duration,onOptionPress,onAudionPress}) => {
     return (
         <>
         <View style={styles.container}>
+        <TouchableWithoutFeedback onPress={onAudionPress}>
             <View style={styles.leftContainer}>
                 <View style={styles.thumbnail}>
                     <Text style={styles.thumbnailText}>{getThumbnailText(title)}</Text>
@@ -45,6 +46,7 @@ const AudioListItem = ({title,duration,onOptionPress}) => {
                 </View>
 
             </View>
+        </TouchableWithoutFeedback>    
             <View style={styles.rightContainer}>
 
                 <Entypo 

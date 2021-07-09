@@ -32,13 +32,18 @@ export class AudioList extends Component {
                dim.height=0;   
         }
        
-    })
+    });
+
+    handleAudioPress = ()=>{
+        console.log('press audio');
+    }
 
     rowRender = (type,item) =>{
         console.log(item)
         return <AudioListItem
         title={item.filename} 
         duration={item.duration}
+        onAudionPress={this.handleAudioPress}
 
         onOptionPress={()=>{
             this.currentItem=item;
