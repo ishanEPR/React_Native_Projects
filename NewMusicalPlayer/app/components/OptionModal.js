@@ -45,7 +45,7 @@ const styles=StyleSheet.create({
         left:0,
         backgroundColor:color.APP_BG,
         borderTopLeftRadius:20,
-        borderTopRighttRadius:20,
+        borderTopRightRadius:20,
         zIndex:1000,
     },
     title:{

@@ -28,7 +28,9 @@ export class AudioList extends Component {
 
    
 
-    layoutProvider=new LayoutProvider((i) => 'audio',(type,dim)=>{
+    layoutProvider=new LayoutProvider(
+        i => 'audio',
+        (type,dim)=>{
         switch(type)
         {
             case 'audio':
@@ -82,14 +84,14 @@ export class AudioList extends Component {
             const status=await resume(playbackObj)
 
              return updateState(this.context,{soundObj: status})
-
+ 
 
         }
     }
 
     rowRender = (type,item) =>{
         console.log(item)
-        return <AudioListItem
+        return <AudioListItem 
         title={item.filename} 
         duration={item.duration}
         onAudionPress={() => this.handleAudioPress(item)}
