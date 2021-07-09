@@ -39,13 +39,25 @@ export class AudioList extends Component {
     });
 
     handleAudioPress = async audio=>{
-        //console.log(audio)
-      //  console.log('press audio');
+
+        ///playing audio for the first time
+        if(this.state.soundObj === null)
+        {
+
+            
       const playbackObj=new Audio.Sound()
       const status=await playbackObj.loadAsync(
           {uri: audio.uri},
           {shouldPlay: true});
-          console.log(status);
+         // console.log(status);
+        return this.setState({...this.state, playbackObj: playbackObj, soundObj: status})
+        }
+
+        //pause audio
+        if(this.state.soundObj.isLoaded && this.state.soundObj.isPlaying)
+        {
+            console.log('audion is already runnung');
+        }
     }
 
     rowRender = (type,item) =>{
