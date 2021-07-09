@@ -5,6 +5,9 @@ import {RecyclerListView, LayoutProvider} from 'recyclerlistview';
 import AudioListItem from '../components/AudioListItem';
 import Screen from '../components/Screen.js';
 import OptionModal from '../components/OptionModal.js';
+import audioController from '../misc/audioController';
+
+import {play, pause,resume} from '../misc/audioController';
 
 import {Audio} from 'expo-av';
 export class AudioList extends Component {
@@ -47,10 +50,7 @@ export class AudioList extends Component {
 
             
       const playbackObj=new Audio.Sound()
-      const status=await playbackObj.loadAsync(
-          {uri: audio.uri},
-          {shouldPlay: true});
-         // console.log(status);
+      const status=await play(playbackObj,audio.uri)
         return this.setState({
             ...this.state, 
             currentAudio:audio,
@@ -61,9 +61,10 @@ export class AudioList extends Component {
         //pause audio
         if(this.state.soundObj.isLoaded && this.state.soundObj.isPlaying)
         {
+          //  audioController.pause()
            // console.log('audion is already runnung');
 
-          const status=await this.state.playbackObj.setStatusAsync({shouldPlay: false})
+          const status=await pause(this.state.playbackObj);
 
            return this.setState(
                {...this.state, 
@@ -75,7 +76,7 @@ export class AudioList extends Component {
         if(this.state.soundObj.isLoaded && !thi.state.soundObj.isPlaying
         && currentAudio.id === audio.id )
         {
-            const status=await this.state.playbackObj.playAsync()
+            const status=await resume(this.state.playbackObj)
              return this.setState(
                {...this.state, 
                
