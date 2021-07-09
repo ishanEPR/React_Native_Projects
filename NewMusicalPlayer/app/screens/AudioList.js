@@ -16,6 +16,7 @@ export class AudioList extends Component {
             optionModalVisible: false,
             playbackObj:null,
             soundObj: null,
+            currentAudio:{},
         }
 
         this.currentItem={}
@@ -50,7 +51,11 @@ export class AudioList extends Component {
           {uri: audio.uri},
           {shouldPlay: true});
          // console.log(status);
-        return this.setState({...this.state, playbackObj: playbackObj, soundObj: status})
+        return this.setState({
+            ...this.state, 
+            currentAudio:audio,
+            playbackObj: playbackObj, 
+            soundObj: status})
         }
 
         //pause audio
@@ -64,6 +69,19 @@ export class AudioList extends Component {
                {...this.state, 
                
                soundObj: status})
+        }
+
+        //resume audio
+        if(this.state.soundObj.isLoaded && !thi.state.soundObj.isPlaying
+        && currentAudio.id === audio.id )
+        {
+            const status=await this.state.playbackObj.playAsync()
+             return this.setState(
+               {...this.state, 
+               
+               soundObj: status})
+
+
         }
     }
 
